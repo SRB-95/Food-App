@@ -1,0 +1,34 @@
+{% extends 'food/base.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food/Detail</title>
+    <style>
+        body{
+            background-image: url("https://previews.123rf.com/images/annapustynnikova/annapustynnikova1602/annapustynnikova160200321/52327530-italian-food-background-with-vine-tomatoes-basil-spaghetti-olives-parmesan-olive-oil-garlic-ingredie.jpg");
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" style="margin-top: 50px;">
+                <img height="300px" src="{{ item.item_image }}" class="card"/>
+            </div>
+
+            <div class="col-md-6" style="margin-top: 50px;">
+                <h1>{{ object.item_name }}</h1>
+                <h3>{{ object.item_desc }}</h3>
+                <h4>$ {{ object.item_price }}</h4>
+                <button type="button" class="btn btn-outline-warning"><a href="{% url 'food:update_item' item.id %}"><b>Update</b></a></button> 
+                <p></p>
+                <button type="button" class="btn btn-outline-danger"><a href="{% url 'food:delete_item' item.id %}"><b>Delete</b></a></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

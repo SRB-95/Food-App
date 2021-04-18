@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'food/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <title>Food/base</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-image: url("https://gomohealth.com/wp-content/uploads/2018/10/Healthy-Food-Wood-Gradient-Background.jpg");
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <!-- Logo -->
+        <div>
+            <a class="navbar-brand" href="{% url 'food:index' %}"
+                style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;"><i
+                    style="color: gold;">kitchen office...!</i>
+            </a>
+            <button class="btn btn-outline-warning mr-1">
+                <a href="{% url 'food:index' %}">Home</a>
+            </button>
+            <button class="btn btn-outline-warning mr-3">
+                <a href="{% url 'food:create_item' %}">Add Item</a>
+            </button>
+        </div>
+        <div class="navbar">
+            <!-- Search Functionality -->
+            <div>
+                <form action="/search" method="GET">
+                    <div class="input-group">
+                        <input type="search" class="form-control rounded btn-outline-warning" name="s_form"
+                            placeholder="Search..." aria-label="Search" />
+                        <button class="btn btn-outline-warning my-1 my-sm-0" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                {% if user.is_authenticated %}
+                <button class="btn btn-outline-warning  ml-3 mr-1">
+                    <a href="{% url 'logout' %}">Logout</a>
+                </button>
+                <button class="btn btn-outline-warning">
+                    <a href="{% url 'profile' %}">Profile</a>
+                </button>
+                {% else %}
+                <button class="btn btn-outline-warning ml-3 mr-1">
+                    <a href="{% url 'login' %}">Login</a>
+                </button>
+                <button class="btn btn-outline-warning">
+                    <a href="{% url 'register' %}">Register</a>
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Registration Successful message -->
+    {% if messages %}
+    {% for message in messages %}
+    <div class='alert alert-{{ message.tags }}'>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block body %}
+        {% endblock %}
+    </div>
+
+    <div>
+        {% block dlt_body %}
+        {% endblock %}
+    </div>
+
+    <div>
+        {% block logout_body %}
+        {% endblock %}
+    </div>
+
+    <div>
+        {% block profile_body %}
+        {% endblock %}
+    </div>
+
+    <div>
+        {% block search_body %}
+        {% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{% extends 'food/base.html' %}
+{% block profile_body %}
+<div class="col-md-6"></div>
+<div class="col-md-6" style="text-align: center;">
+    <h3>User Name: {{ user.username }}</h3>
+    <h3>Profile: </h3>
+    <img width='150px' height='150px' src="{{ user.profile.image.url }}" style="border: 2px solid black; border-radius: 5px;">
+</div>
+{% endblock %}
